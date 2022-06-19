@@ -1,0 +1,89 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API DOC",
+        "description": "תיעוד API לשליחת הודעות ומדיה.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://devwt.adpronet.com",
+            "description": "API"
+        }
+    ],
+    "paths": {
+        "/api/messages/send": {
+            "post": {
+                "summary": "Sending Messages",
+                "description": "Messaging",
+                "tags": [
+                    "SEND"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/SEND"
+                            },
+                            "examples": {
+                                "SEND": {
+                                    "value": {
+                                        "number": "972540000000",
+                                        "body": "API Test Message"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#components/schemas/SEND"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized access!"
+                    },
+                    "500": {
+                        "description": "Internal error!"
+                    }
+                }
+            }
+        }
+        
+    },
+    "components": {
+        "schemas": {
+            "SEND": {
+                "type": "object",
+                "properties": {
+                    "number": {
+                        "type": "number"
+                    },
+                    "body": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
